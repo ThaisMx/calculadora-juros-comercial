@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculadora de Valor do Produto</title>
+  </head>
+  <body>
+    <h2>Calculadora de Valor do Produto para Parcelamento</h2>
+    <label for="limiteCartao">Digite o limite do seu cartão de crédito:</label>
+    <input type="number" id="limiteCartao" placeholder="Limite do cartão" />
+    <button onclick="calcularValorProduto()">Calcular Valor do Produto</button>
+    <p id="resultado">O valor do produto aparecerá aqui.</p>
+
+    <script>
+      function calcularValorProduto() {
+        var limiteCartao = document.getElementById("limiteCartao").value
+        var taxaJurosMensal = 2.49 / 100
+        var numeroParcelas = 12
+
+        // Cálculo do valor do produto
+        var parcelaMaxima =
+          (limiteCartao / ((1 + taxaJurosMensal) ** numeroParcelas - 1)) *
+          taxaJurosMensal
+        var valorProduto =
+          (parcelaMaxima * (1 - (1 + taxaJurosMensal) ** -numeroParcelas)) /
+          taxaJurosMensal
+
+        // Exibindo o resultado
+        document.getElementById("resultado").innerHTML =
+          "O valor máximo do produto para parcelamento em 12x sem ultrapassar o limite do cartão é: R$ " +
+          valorProduto.toFixed(2)
+      }
+    </script>
+  </body>
+</html>

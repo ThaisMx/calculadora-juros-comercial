@@ -8,26 +8,31 @@
     <label for="limiteCartao">Digite o limite do seu cartão de crédito:</label>
     <input type="number" id="limiteCartao" placeholder="Limite do cartão" />
     <button onclick="calcularValorProduto()">Calcular Valor do Produto</button>
-    <p id="resultado">O valor do produto aparecerá aqui.</p>
+    <div id="resultado">O valor do produto aparecerá aqui.</div>
 
     <script>
       function calcularValorProduto() {
-        var limiteCartao = document.getElementById("limiteCartao").value
-        var taxaJurosMensal = 2.49 / 100
-        var numeroParcelas = 12
+        var limiteCartao = document.getElementById("limiteCartao").value;
+        var taxaJurosMensal = 2.69 / 100;
+        
+        // Limpar resultados anteriores
+        document.getElementById("resultado").innerHTML = "";
 
-        // Cálculo do valor do produto
-        var parcelaMaxima =
-          (limiteCartao / ((1 + taxaJurosMensal) ** numeroParcelas - 1)) *
-          taxaJurosMensal
-        var valorProduto =
-          (parcelaMaxima * (1 - (1 + taxaJurosMensal) ** -numeroParcelas)) /
-          taxaJurosMensal
+        // Tratamento especial para a primeira parcela (sem juros)
+        var paragrafo = document.createElement("p");
+        paragrafo.innerHTML = "Para 1x (sem juros): R$ " + parseFloat(limiteCartao).toFixed(2);
+        document.getElementById("resultado").appendChild(paragrafo);
 
-        // Exibindo o resultado
-        document.getElementById("resultado").innerHTML =
-          "O valor máximo do produto para parcelamento em 12x sem ultrapassar o limite do cartão é: R$ " +
-          valorProduto.toFixed(2)
+        // Calcular e exibir valores para cada quantidade de parcelas de 2 a 12
+        for (var numeroParcelas = 2; numeroParcelas <= 12; numeroParcelas++) {
+          var parcelaMaxima = (limiteCartao / ((1 + taxaJurosMensal) ** (numeroParcelas - 1) - 1)) * taxaJurosMensal;
+          var valorProduto = (parcelaMaxima * (1 - (1 + taxaJurosMensal) ** -(numeroParcelas - 1))) / taxaJurosMensal;
+
+          // Exibindo o resultado para cada número de parcelas
+          paragrafo = document.createElement("p");
+          paragrafo.innerHTML = "Para " + numeroParcelas + "x: R$ " + valorProduto.toFixed(2);
+          document.getElementById("resultado").appendChild(paragrafo);
+        }
       }
     </script>
   </body>

@@ -1,0 +1,58 @@
+body {
+  background-color: #f1f7fe;
+  font-family: "Mulish", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+input,
+button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #bfdcf8;
+}
+
+input {
+  background-color: #ffffff;
+}
+
+button {
+  background-image: linear-gradient(to right, #1e84d9, #0f5ea9);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  font-family: "Mulish", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#resultado p {
+  background-color: #e2eefc;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  animation: fadeIn 1s;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

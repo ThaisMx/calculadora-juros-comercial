@@ -1,7 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculadora de Valor do Produto</title>
+
+    <link rel="stylesheet" href="./style.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <h2>Calculadora de Valor do Produto para Parcelamento</h2>
@@ -9,29 +20,36 @@
     <input type="number" id="limiteCartao" placeholder="Limite do cartão" />
     <button onclick="calcularValorProduto()">Calcular Valor do Produto</button>
     <div id="resultado">O valor do produto aparecerá aqui.</div>
-
     <script>
       function calcularValorProduto() {
-        var limiteCartao = document.getElementById("limiteCartao").value;
-        var taxaJurosMensal = 2.69 / 100;
-        
+        var limiteCartao = document.getElementById("limiteCartao").value
+        var taxaJurosMensal = 2.69 / 100
+
         // Limpar resultados anteriores
-        document.getElementById("resultado").innerHTML = "";
+        document.getElementById("resultado").innerHTML = ""
 
         // Tratamento especial para a primeira parcela (sem juros)
-        var paragrafo = document.createElement("p");
-        paragrafo.innerHTML = "Para 1x (sem juros): R$ " + parseFloat(limiteCartao).toFixed(2);
-        document.getElementById("resultado").appendChild(paragrafo);
+        var paragrafo = document.createElement("p")
+        paragrafo.innerHTML =
+          "Para 1x (sem juros): R$ " + parseFloat(limiteCartao).toFixed(2)
+        document.getElementById("resultado").appendChild(paragrafo)
 
         // Calcular e exibir valores para cada quantidade de parcelas de 2 a 12
         for (var numeroParcelas = 2; numeroParcelas <= 12; numeroParcelas++) {
-          var parcelaMaxima = (limiteCartao / ((1 + taxaJurosMensal) ** (numeroParcelas - 1) - 1)) * taxaJurosMensal;
-          var valorProduto = (parcelaMaxima * (1 - (1 + taxaJurosMensal) ** -(numeroParcelas - 1))) / taxaJurosMensal;
+          var parcelaMaxima =
+            (limiteCartao /
+              ((1 + taxaJurosMensal) ** (numeroParcelas - 1) - 1)) *
+            taxaJurosMensal
+          var valorProduto =
+            (parcelaMaxima *
+              (1 - (1 + taxaJurosMensal) ** -(numeroParcelas - 1))) /
+            taxaJurosMensal
 
           // Exibindo o resultado para cada número de parcelas
-          paragrafo = document.createElement("p");
-          paragrafo.innerHTML = "Para " + numeroParcelas + "x: R$ " + valorProduto.toFixed(2);
-          document.getElementById("resultado").appendChild(paragrafo);
+          paragrafo = document.createElement("p")
+          paragrafo.innerHTML =
+            "Para " + numeroParcelas + "x: R$ " + valorProduto.toFixed(2)
+          document.getElementById("resultado").appendChild(paragrafo)
         }
       }
     </script>
